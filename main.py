@@ -1,13 +1,30 @@
-class AAA:
-    class_attr = "类属性"  # 类属性
-    def __init__(self):
-        pass
+from flask import Flask, render_template, request, redirect, url_for
 
-obj = AAA()
-obj.class_attr = 1
+app = Flask(__name__)
 
-print(obj.class_attr)
-print(AAA.class_attr)
+# 初始的待办事项列表
+todo_list = []
 
-#
-# cls 参数引用了 MyClass 这个类自身。因此，cls.class_variable 可以访问类的属性，cls.another_class_method() 可以调用其他类方法。
+
+@app.route('/')
+def index():
+    return render_template('index.html', todo_list=todo_list)
+
+
+@app.route('/add', methods=['POST'])
+def add():
+    todo = request.form.get('todo')
+    if todo:
+        todo_list.append(todo)
+    return redirect(url_for('index'))
+
+
+@app.route('/delete/<int:index>')
+def delete(index):
+    if 0 <= index < len(todo_list):
+        del todo_list[index]
+    return redirect(url_for('index'))
+
+
+if __name__ == '__main__':
+    app.run()
