@@ -1,7 +1,0 @@
-DATABASE:
-  DB_TYPE: mysql
-  DB: todo_mvc
-  HOST: 127.0.0.1
-  PORT: 3306
-  USER: root
-  PASSWORD: ""
