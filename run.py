@@ -1,8 +1,7 @@
-from todo import create_app
+from backend import create_app
 
 app = create_app()
 
 
 if __name__ == '__main__':
-    print(app.url_map)
     app.run(debug=True)

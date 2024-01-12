@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from todo.api import bp
+from backend.api import bp
 
 todos = [
     {"id": 1, "text": "Flask", "completed": False},
