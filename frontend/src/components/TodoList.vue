@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for="todo in todos" :key="todo.id">
-        {{ todo.text }}
+        {{ todo.title }}
         <button @click="editTodo(todo.id)">编辑</button>
         <button @click="deleteTodo(todo.id)">删除</button>
       </li>
@@ -35,7 +35,7 @@ export default {
 
     const addTodo = () => {
       if (newTodo.value) {
-        TodoService.addTodo({ text: newTodo.value })
+        TodoService.addTodo({ title: newTodo.value })
           .then(() => {
             newTodo.value = '';
             fetchTodos();
@@ -49,7 +49,7 @@ export default {
     const editTodo = (todoId) => {
       const newText = prompt('重新输入一个todo:');
       if (newText !== null) {
-        TodoService.updateTodo(todoId, { text: newText })
+        TodoService.updateTodo(todoId, { title: newText })
           .then(() => {
             fetchTodos();
           })
