@@ -1,5 +1,5 @@
-
-
+from flask_sqlalchemy import SQLAlchemy
+from .database import db
 def init_app(app):
     from backend.configuration import config_provider
     config = config_provider.config['DATABASE']
@@ -9,6 +9,7 @@ def init_app(app):
 
 def _init_sqlalchemy(app, config):
     app.config["SQLALCHEMY_DATABASE_URI"] = get_connection_url(config)
+    print(app.config["SQLALCHEMY_DATABASE_URI"])
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
 

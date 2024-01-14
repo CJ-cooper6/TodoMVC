@@ -1,14 +1,11 @@
 from flask import request, jsonify
 from backend.api import bp
+from backend.todo_item.repository import get_all_todos
 
-todos = [
-    {"id": 1, "text": "Flask", "completed": False},
-    {"id": 2, "text": "Vue 3", "completed": True},
-]
-
-@bp.route('/todos', methods=['GET'])
+@bp.route('/todo_item', methods=['GET'])
 def get_todos():
-    return jsonify(todos)
+    todo_items = get_all_todos()
+    return jsonify(todo_items)
 
 
 @bp.route('/todos', methods=['POST'])

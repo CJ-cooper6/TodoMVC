@@ -1,7 +1,7 @@
 DATABASE:
   DB_TYPE: mysql
-  DB: lms_dev
-  HOST: 127.0.0.1
+  DB: todo
+  HOST: localhost
   PORT: 3306
   USER: root
-  PASSWORD: ""
+  PASSWORD: "123456"
