@@ -18,4 +18,8 @@ export default {
   deleteTodo(todoId) {
     return axios.delete(`${apiBaseUrl}/${todoId}`);
   },
+
+  loginSubmit(data) {
+    return axios.post(`${apiBaseUrl}/login`, data);
+  }
 };

@@ -1,19 +1,13 @@
 <template>
     <div class="app">
-        <h1>TodoMVC</h1>
-        <TodoList />
+        <Auth />
+        <Navbar />
     </div>
 </template>
 
-<script lang="js">
-  import TodoList from './components/TodoList.vue';
-
-    export default{
-        name:'APP',
-        components: {
-            TodoList,
-        },
-    }
+<script lang="js" setup>
+  import Navbar from './components/Navbar.vue';
+  import Auth from './views/Auth.vue';
 </script>
 
 
