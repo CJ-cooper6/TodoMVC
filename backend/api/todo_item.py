@@ -1,13 +1,15 @@
 from flask import request, jsonify
 from backend.api import bp
 from backend.todo_item.repository import get_all_todos, add_todo, update_todo, delete_todo
+from flask_login import login_required
 
+@login_required
 @bp.route('/todos', methods=['GET'])
 def get_todos():
     todo_items = get_all_todos()
     return jsonify(todo_items)
 
-
+@login_required
 @bp.route('/todos', methods=['POST'])
 def add_todo_item():
     data = request.get_json()

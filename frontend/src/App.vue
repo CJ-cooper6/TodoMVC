@@ -1,6 +1,6 @@
 <template>
     <div class="app">
-        <Auth />
+        <!-- <Auth /> -->
         <Navbar />
     </div>
 </template>

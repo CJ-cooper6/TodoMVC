@@ -1,16 +1,16 @@
 
 <template>
+<div class="login-body">
 <div class="login-container">
     <h2>Login</h2>
     <div>
         <label for="username">用户名:</label>
         <input v-model="username"/>
-
         <label for="password">密码:</label>
         <input v-model="password"/>
-
         <button @click="login">登录</button>
     </div>
+</div>
 </div>
 </template>
 
@@ -33,14 +33,12 @@ const login = () => {
           })
           .catch(error => {
             console.error('登录失败:', error);
-          });
-        
-    
+          }); 
 };
 </script>
 
 <style>
-        body {
+        .login-body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             display: flex;
@@ -58,14 +56,14 @@ const login = () => {
             width: 300px;
         }
 
-        input {
+        .login-container input {
             width: 100%;
             padding: 10px;
             margin: 8px 0;
             box-sizing: border-box;
         }
 
-        button {
+        .login-container button {
             width: 100%;
             padding: 10px;
             background-color: #4caf50;
@@ -75,7 +73,7 @@ const login = () => {
             cursor: pointer;
         }
 
-        button:hover {
+        .login-container button:hover {
             background-color: #45a049;
         }
     </style>

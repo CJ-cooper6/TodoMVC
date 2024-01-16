@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const apiBaseUrl = 'http://localhost:5000/api/todos';
+const loginBaseUrl = 'http://localhost:5000/api';
 
 export default {
   getTodos() {
@@ -20,6 +21,6 @@ export default {
   },
 
   loginSubmit(data) {
-    return axios.post(`${apiBaseUrl}/login`, data);
+    return axios.post(`${loginBaseUrl}/login`, data);
   }
 };

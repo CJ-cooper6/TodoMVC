@@ -10,4 +10,7 @@ cd frontend
 npm install
 npm run dev
 
+#npm config set registry https://registry.npm.taobao.org
+
+
 
