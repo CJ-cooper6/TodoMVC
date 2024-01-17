@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="todo in todos" :key="todo.id">
-        {{ todo.title }}
-        <button @click="editTodo(todo.id)">编辑</button>
-        <button @click="deleteTodo(todo.id)">删除</button>
+  <div class="todo-app">
+    <ul class="todo-list">
+      <li v-for="todo in todos" :key="todo.id" class="todo-item">
+        <span class="todo-title">{{ todo.title }}</span>
+        <div class="todo-buttons">
+          <button @click="editTodo(todo.id)" class="edit-button">编辑</button>
+          <button @click="deleteTodo(todo.id)" class="delete-button">删除</button>
+        </div>
       </li>
     </ul>
-    <div>
-      <input v-model="newTodo" placeholder="New Todo" />
-      <button @click="addTodo">添加</button>
+    <div class="add-todo">
+      <input v-model="newTodo" placeholder="New Todo" class="todo-input" />
+      <button @click="addTodo" class="add-button">添加</button>
     </div>
   </div>
 </template>
@@ -85,3 +87,60 @@ export default {
   },
 };
 </script>
+
+<style>
+.todo-app {
+  max-width: 600px;
+  margin: auto;
+  font-family: 'Arial', sans-serif;
+}
+
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.todo-title {
+  flex-grow: 1;
+}
+
+.todo-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.todo-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 8px;
+  flex-grow: 1;
+}
+
+.add-button {
+  padding: 8px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-button,
+.delete-button {
+  padding: 8px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>

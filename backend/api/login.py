@@ -5,8 +5,10 @@ from flask_login import login_user
 
 @bp.route("/login", methods=["POST"])
 def login():
-    username=request.form.get('username')
-    password=request.form.get('password')
+    data = request.get_json()
+    username=data.get('username')
+    password=data.get('password')
+    print(username,password)
     user = get_user_by_username(username)
     if user and user.check_password(password):
         login_user(user, remember=True)

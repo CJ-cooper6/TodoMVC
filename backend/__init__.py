@@ -19,6 +19,7 @@ def create_app():
     config_file_path = get_config_file_path()
     config_provider.load(config_file_path)
     login_manager.init_app(app)  
+    app.config['SECRET_KEY'] = 'todoMVC'
     todo_db.init_app(app)
     _register_blueprints(app)
     with app.app_context():

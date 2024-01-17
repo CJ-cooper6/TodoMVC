@@ -17,19 +17,18 @@
 <script lang="js" setup>
 import { ref, onMounted } from 'vue';
 import TodoService from '../service';
+import { useRouter } from 'vue-router';
     const username = ref('');
     const password = ref('');
+    const router = useRouter();
 
 const login = () => {
-    console.log(username)
-    console.log(password)
     TodoService.loginSubmit({
              username: username.value,
              password: password.value
         })
           .then(() => {
-            newTodo.value = '';
-            fetchTodos();
+            router.push('/home');
           })
           .catch(error => {
             console.error('登录失败:', error);

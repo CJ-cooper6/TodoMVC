@@ -1,7 +1,8 @@
 <template>
     <div class="app">
-        <!-- <Auth /> -->
-        <Navbar />
+       <!-- <router-link to="/">Login</router-link>
+      <router-link to="/home">Home</router-link> -->
+    <router-view></router-view>
     </div>
 </template>
 

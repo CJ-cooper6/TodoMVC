@@ -9,11 +9,10 @@
     </div>
     <div class="main_content">
         <div class="header">
-            <div>
+            <!-- <div>
                 <span>Out</span>
                 <ArrowRightOutlined />
-            </div>
-            
+            </div> -->
         </div>
 
         <div class="main">
