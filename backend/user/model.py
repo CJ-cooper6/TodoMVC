@@ -18,7 +18,7 @@ class User(db.Model,UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
     
-    def is_active():
+    def is_active(self):
         return True
 
     def is_anonymous(self):
