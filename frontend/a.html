@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixed Width Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      min-height: 100vh; /* 保证整个页面高度占满视口 */
+    }
+
+    .sidebar {
+      width: 15%;
+      background-color: #4b4276;
+      color: white;
+      padding: 20px;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Sidebar</h2>
+    <!-- 其他左侧内容 -->
+  </div>
+
+  <div class="main-content">
+    <h2>Main Content</h2>
+    <!-- 其他右侧内容 -->
+  </div>
+</body>
+</html>

@@ -5,7 +5,7 @@ from backend.database.database import db
 
 def get_all_todos():
     todos = TodoItem.query.all()
-    return [{"id": todo.id, "title": todo.title, "completed": todo.completed} for todo in todos]
+    return [{"id": todo.id, "title": todo.title, "completed": todo.completed, "end_time": todo.end_time} for todo in todos]
 
 
 def add_todo(title, completed=False):

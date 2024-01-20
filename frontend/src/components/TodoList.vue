@@ -2,17 +2,15 @@
   <div class="todo-app">
     <ul class="todo-list">
       <li v-for="todo in todos" :key="todo.id" class="todo-item">
-        <span class="todo-title">{{ todo.title }}</span>
+        <div class="todo-title">{{ todo.title }}</div>
+        <div class="todo-due-by">{{ todo.end_time }}</div>
+        <div class="todo-status">{{ todo.completed }}</div>
         <div class="todo-buttons">
           <button @click="editTodo(todo.id)" class="edit-button">编辑</button>
           <button @click="deleteTodo(todo.id)" class="delete-button">删除</button>
         </div>
       </li>
     </ul>
-    <div class="add-todo">
-      <input v-model="newTodo" placeholder="New Todo" class="todo-input" />
-      <button @click="addTodo" class="add-button">添加</button>
-    </div>
   </div>
 </template>
 
@@ -24,30 +22,18 @@ import TodoService from '../service';
 export default {
   setup() {
     const todos = ref([]);
-    const newTodo = ref('');
 
     const fetchTodos = () => {
       TodoService.getTodos()
         .then(response => {
           todos.value = response.data;
+          console.log(todos.value)
         })
         .catch(error => {
           console.error('获取失败:', error);
         });
     };
 
-    const addTodo = () => {
-      if (newTodo.value) {
-        TodoService.addTodo({ title: newTodo.value })
-          .then(() => {
-            newTodo.value = '';
-            fetchTodos();
-          })
-          .catch(error => {
-            console.error('增加todo失败:', error);
-          });
-      }
-    };
 
     const editTodo = (todoId) => {
       const newText = prompt('重新输入一个todo:');
@@ -78,9 +64,7 @@ export default {
 
     return {
       todos,
-      newTodo,
       fetchTodos,
-      addTodo,
       editTodo,
       deleteTodo,
     };
@@ -90,49 +74,44 @@ export default {
 
 <style>
 .todo-app {
-  max-width: 600px;
-  margin: auto;
   font-family: 'Arial', sans-serif;
+  background-color: #fff;
+  border-color: #fff;
+  color: rgba(0,0,0,.87);
 }
 
-.todo-list {
+.todo-app .todo-list {
   list-style-type: none;
   padding: 0;
 }
 
-.todo-item {
+.todo-app .todo-list .todo-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ccc;
   padding: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
 }
 
-.todo-title {
-  flex-grow: 1;
+.todo-app .todo-list .todo-item .todo-title {
+
 }
 
-.todo-buttons {
-  display: flex;
-  gap: 8px;
+.todo-app .todo-list .todo-item .todo-due-by {
+
 }
 
-.todo-input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 8px;
-  flex-grow: 1;
+.todo-app .todo-list .todo-item .todo-status {
+
 }
 
-.add-button {
-  padding: 8px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.todo-app .todo-list .todo-item .todo-buttons {
+
 }
+
+
 
 .edit-button,
 .delete-button {
