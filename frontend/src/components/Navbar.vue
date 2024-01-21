@@ -13,27 +13,25 @@
 
             <div class="main">
                 <div class="laout">
-                    <button type="button">
-                        <div class="v-btn__content">
-                            all
+                    <div class="button-icon">
+                        <div class="icon-bank-out">
+                            <AppstoreOutlined @click="store.commit('toggleAddTodoPopup')"/>
                         </div>
-                    </button>
-                    <button type="button">
-                        <div class="v-btn__content">
-                            complete
+                    </div>
+                    <div class="button-icon">
+                        <div class="icon-check-circle">
+                            <CheckCircleOutlined @click="store.commit('toggleAddTodoPopup')"/>
                         </div>
-                    </button>
-                    <button @click="store.commit('toggleAddTodoPopup')">
-                        <div class="v-btn__content">
-                            add
+                    </div>
+                    <div class="spacer"></div> 
+                    <div class="button-icon">
+                        <div class="icon-plus-circle">
+                            <PlusCircleOutlined @click="store.commit('toggleAddTodoPopup')"/>
                         </div>
-                    </button>
-
-
+                    </div>
                 </div>  
-                <AddTodoPopup v-if="add_todo_popup"/>
-
-                <TodoList v-if="!add_todo_popup"/>
+                <AddTodoPopup v-if="add_todo_popup" />
+                <TodoList/>
             </div>
 
         </div>
@@ -43,7 +41,11 @@
 import { computed } from "vue";
 import { useStore } from 'vuex'
 import {
-    ArrowRightOutlined
+    ArrowRightOutlined,
+    CheckCircleOutlined,
+    PlusCircleOutlined,
+    AppstoreOutlined
+
 } from '@ant-design/icons-vue';
 
 
@@ -56,7 +58,7 @@ const store = useStore()
 const add_todo_popup = computed(() => store.state.add_todo_popup);
 
 </script>
-<style>
+<style scoped>
 .wrapper {
     display: flex;
 }
@@ -64,6 +66,7 @@ const add_todo_popup = computed(() => store.state.add_todo_popup);
     width: 15%;
     min-height: 100vh;
     background-color: #4b4276;
+    
 }
 
 .wrapper .sidebar h2 {
@@ -80,6 +83,7 @@ const add_todo_popup = computed(() => store.state.add_todo_popup);
     border-bottom: 1px solid #bdb8d7;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
 }
 
 .wrapper .sidebar ul li:hover {
@@ -106,7 +110,7 @@ const add_todo_popup = computed(() => store.state.add_todo_popup);
 }
 
 .wrapper .main_content .main {
-    margin: 50px 10px 10px 10px;
+    margin: 50px 24px 24px 24px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -123,7 +127,34 @@ const add_todo_popup = computed(() => store.state.add_todo_popup);
 .wrapper .main_content .main .laout {
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px; /* 为了增加一些间距，可根据需要调整 */
+    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center; 
+    margin-left: 10px;
+}
+
+.icon-check-circle {
+    color: green;
+}
+
+.icon-bank-out {
+    color: #9652ff;
+}
+
+.icon-plus-circle {
+    color: rgb(0, 119, 255);
+    margin-right: 20px;
+}
+
+.button-icon {
+    display: flex;
+    font-size: 24px;
+    justify-content: center;
+    margin: 6px 8px;
+}
+
+.spacer {
+  flex-grow: 1; 
 }
 </style>
   

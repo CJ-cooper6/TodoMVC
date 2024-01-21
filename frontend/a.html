@@ -5,35 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fixed Width Page</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      min-height: 100vh; /* 保证整个页面高度占满视口 */
-    }
-
-    .sidebar {
-      width: 15%;
-      background-color: #4b4276;
-      color: white;
-      padding: 20px;
-    }
-
-    .main-content {
-      flex-grow: 1;
-      padding: 20px;
-    }
+   .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
   </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h2>Sidebar</h2>
-    <!-- 其他左侧内容 -->
-  </div>
-
-  <div class="main-content">
-    <h2>Main Content</h2>
-    <!-- 其他右侧内容 -->
+  <div v-if="showModal" class="modal">
+    <span @click="closeModal" class="close-btn">&times;</span>
+    <p>这是一个简单的弹窗内容。</p>
   </div>
 </body>
 </html>
