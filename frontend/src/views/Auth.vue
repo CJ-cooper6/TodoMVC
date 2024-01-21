@@ -7,7 +7,7 @@
         <label for="username">用户名:</label>
         <input v-model="username"/>
         <label for="password">密码:</label>
-        <input v-model="password"/>
+        <input v-model="password" type="password"/>
         <button @click="login">登录</button>
     </div>
 </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="js" setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import TodoService from '../service';
 import { useRouter } from 'vue-router';
     const username = ref('');

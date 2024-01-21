@@ -3,13 +3,20 @@
         <div class="modal">
             <div class="header">
                 <div>
-                    添加Todo
+                    添加 Todo
                 </div>
             </div>
             <div class="content">
-                <input v-model="newTodo" placeholder="New Todo" class="todo-input" />
-                <button @click="addTodo" class="add-button">添加</button>
-                <button @click="store.commit('toggleAddTodoPopup')" class="add-button">取消</button>
+                <div class="edit-item">
+                    <span class="icon-edit">
+                        <EditOutlined />
+                    </span>
+                    <input v-model="newTodo" placeholder="Title" class="todo-input" />
+                </div>
+                <div class="button-container">
+                    <button @click="addTodo" class="add-button">添加</button>
+                    <button @click="store.commit('toggleAddTodoPopup')" class="close-button">取消</button>
+                </div>
             </div>
         </div>
     </div>
@@ -19,6 +26,10 @@
 import { ref } from 'vue';
 import TodoService from '../service';
 import { useStore } from 'vuex'
+import {
+    EditOutlined
+
+} from '@ant-design/icons-vue';
 
 const newTodo = ref('');
 const store = useStore()
@@ -38,24 +49,7 @@ const addTodo = () => {
 
 </script>
 
-<style>
-.todo-input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 8px;
-    flex-grow: 1;
-}
-
-.add-button {
-    padding: 8px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
+<style scoped>
 .modal {
     position: fixed;
     top: 50%;
@@ -64,13 +58,54 @@ const addTodo = () => {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 30%;
+    height: 40%;
 }
 
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    align-items: center;
+    font-size: 21px;
+    font-weight: 700;
+
+}
+
+.content {
+    margin: 30px 10px 10px 10px;
+}
+
+.edit-item {
+    display: flex;
+}
+
+.todo-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 8px;
+    flex-grow: 1;
+    font-size: 16px;
+}
+
+.add-button,
+.close-button {
+    padding: 8px;
+    color: white;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    margin: 10px;
+}
+
+.add-button {
+    background-color: #4caf50;
+}
+
+.close-button {
+    background-color: rgb(241, 34, 34);
+
 }
 
 .overlay {
@@ -88,11 +123,18 @@ const addTodo = () => {
     /* 确保在最上层 */
 }
 
-.header {
+.icon-edit {
     display: flex;
-    flex-wrap: wrap;
-    padding: 16px;
-    align-items: center;
+    font-size: 22px;
+    margin: 6px 8px;
+    color: rgba(0, 0, 0, .54);
+}
+
+.button-container {
+    position: fixed;
+    top: 80%;
+    left: 39%;
+    display: flex;
 }
 </style>
   
