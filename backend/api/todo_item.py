@@ -16,7 +16,7 @@ def add_todo_item():
     new_todo = add_todo(title=data.get("title"), completed=data.get("completed", False))
     return jsonify(new_todo), 200
 
-
+@login_required
 @bp.route('/todos/<int:todo_id>', methods=['PUT'])
 def update_todo_item(todo_id):
     data = request.get_json()
@@ -26,7 +26,7 @@ def update_todo_item(todo_id):
     return jsonify({"error": "Todo not found"}), 404
 
 
-
+@login_required
 @bp.route('/todos/<int:todo_id>', methods=['DELETE'])
 def delete_todo_item(todo_id):
     result = delete_todo(todo_id)

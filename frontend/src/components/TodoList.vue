@@ -5,12 +5,14 @@
         <div class="todo-title">{{ todo.title }}</div>
         <div class="todo-due-by">{{ todo.end_time }}</div>
         <button :class="getButtonClass(todo.completed)">
-          {{ getButtonText((todo.completed)) }}
+          {{ getButtonText(todo.completed) }}
         </button>
         <div class="spacer"></div>
         <div class="todo-buttons">
           <button @click="editTodo(todo.id)" class="edit-button">编辑</button>
-          <button @click="deleteTodo(todo.id)" class="delete-button">删除</button>
+          <button @click="deleteTodo(todo.id)" class="delete-button">
+            删除
+          </button>
         </div>
       </li>
     </ul>
@@ -19,71 +21,71 @@
 
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import TodoService from '../service';
-
+import { ref, onMounted } from "vue";
+import TodoService from "../service";
+import EventBus from '../eventbus';
 
 const todos = ref([]);
 
 const fetchTodos = () => {
   TodoService.getTodos()
-    .then(response => {
+    .then((response) => {
       todos.value = response.data;
     })
-    .catch(error => {
-      console.error('获取失败:', error);
+    .catch((error) => {
+      console.error("获取失败:", error);
     });
 };
 
-
 const editTodo = (todoId) => {
-  const newText = prompt('重新输入一个todo:');
+  const newText = prompt("重新输入一个todo:");
   if (newText !== null) {
     TodoService.updateTodo(todoId, { title: newText })
       .then(() => {
         fetchTodos();
       })
-      .catch(error => {
-        console.error('更新失败:', error);
+      .catch((error) => {
+        console.error("更新失败:", error);
       });
   }
 };
 
 const deleteTodo = (todoId) => {
-  if (confirm('确定删除?')) {
+  if (confirm("确定删除?")) {
     TodoService.deleteTodo(todoId)
       .then(() => {
         fetchTodos();
       })
-      .catch(error => {
-        console.error('删除失败:', error);
+      .catch((error) => {
+        console.error("删除失败:", error);
       });
   }
 };
 
 const getButtonClass = (completed) => {
   return {
-    'button-completed-true': completed === true,
-    'button-completed-false': completed === false,
+    "button-completed-true": completed === true,
+    "button-completed-false": completed === false,
   };
 };
 
 const getButtonText = (completed) => {
-      return completed === true ? '已完成' : '未完成';
-    };
+  return completed === true ? "已完成" : "未完成";
+};
 
 onMounted(() => {
   fetchTodos();
+  EventBus.on('update-todolist', fetchTodos);
 });
 
 </script>
 
 <style scoped>
 .todo-app {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: #fff;
   border-color: #fff;
-  color: rgba(0, 0, 0, .87);
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .todo-app .todo-list {
@@ -117,7 +119,7 @@ onMounted(() => {
 }
 
 .todo-app .todo-list .todo-item .todo-buttons {
-  width: 7%;
+  width: 10%;
   display: flex;
   justify-content: space-between;
 }
@@ -138,11 +140,11 @@ onMounted(() => {
 
 .button-completed-true,
 .button-completed-false {
-  width: 7%; 
+  width: 7%;
   font-size: 15px;
   font-weight: 550;
-  height: 24px; 
-  border-radius: 15px; 
+  height: 24px;
+  border-radius: 15px;
   border: none;
   cursor: pointer;
   display: flex;
@@ -153,7 +155,6 @@ onMounted(() => {
 .button-completed-true {
   background-color: #3cd1c2;
   color: white;
-  
 }
 
 .button-completed-false {

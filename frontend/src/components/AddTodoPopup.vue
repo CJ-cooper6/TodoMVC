@@ -26,6 +26,7 @@
 import { ref } from 'vue';
 import TodoService from '../service';
 import { useStore } from 'vuex'
+import EventBus from '../eventbus';
 import {
     EditOutlined
 
@@ -39,6 +40,7 @@ const addTodo = () => {
         TodoService.addTodo({ title: newTodo.value })
             .then(() => {
                 newTodo.value = '';
+                EventBus.emit('update-todolist');
                 store.commit('toggleAddTodoPopup')
             })
             .catch(error => {
@@ -115,12 +117,10 @@ const addTodo = () => {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* 半透明黑色背景 */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 999;
-    /* 确保在最上层 */
 }
 
 .icon-edit {
@@ -133,7 +133,7 @@ const addTodo = () => {
 .button-container {
     position: fixed;
     top: 80%;
-    left: 39%;
+    left: 36%;
     display: flex;
 }
 </style>

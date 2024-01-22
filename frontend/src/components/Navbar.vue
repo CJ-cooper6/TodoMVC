@@ -15,12 +15,12 @@
                 <div class="laout">
                     <div class="button-icon">
                         <div class="icon-bank-out">
-                            <AppstoreOutlined @click="store.commit('toggleAddTodoPopup')"/>
+                            <AppstoreOutlined />
                         </div>
                     </div>
                     <div class="button-icon">
                         <div class="icon-check-circle">
-                            <CheckCircleOutlined @click="store.commit('toggleAddTodoPopup')"/>
+                            <CheckCircleOutlined />
                         </div>
                     </div>
                     <div class="spacer"></div> 
@@ -31,7 +31,7 @@
                     </div>
                 </div>  
                 <AddTodoPopup v-if="add_todo_popup" />
-                <TodoList/>
+                <TodoList />
             </div>
 
         </div>
@@ -135,10 +135,12 @@ const add_todo_popup = computed(() => store.state.add_todo_popup);
 
 .icon-check-circle {
     color: green;
+    cursor: pointer;
 }
 
 .icon-bank-out {
     color: #9652ff;
+    cursor: pointer;
 }
 
 .icon-plus-circle {
