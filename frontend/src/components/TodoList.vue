@@ -1,10 +1,10 @@
 <template>
   <div class="todo-app">
     <ul class="todo-list">
-      <li v-for="todo in todos" :key="todo.id" class="todo-item">
+      <li v-for="(todo, index) in todo_items" :key="todo.id" class="todo-item" :class="getTodoItemClass(todo.completed)">
         <div class="todo-title">{{ todo.title }}</div>
         <div class="todo-due-by">{{ todo.end_time }}</div>
-        <button :class="getButtonClass(todo.completed)">
+        <button @click="changeTodoStatus(index)" :class="getButtonClass(todo.completed)">
           {{ getButtonText(todo.completed) }}
         </button>
         <div class="spacer"></div>
@@ -16,21 +16,47 @@
         </div>
       </li>
     </ul>
+
+    <div class="pagination">
+      <a-pagination v-model:current="pagination.currentPage" v-model:pageSize="pagination.pageSize" :total="total"
+        :showSizeChanger="true" :pageSizeOptions="['5', '10', '20']" @change="fetchTodos()" />
+    </div>
   </div>
 </template>
 
 
-<script setup>
-import { ref, onMounted } from "vue";
+<script lang="js" setup>
+import { ref, reactive, computed, onMounted } from "vue";
 import TodoService from "../service";
 import EventBus from '../eventbus';
 
-const todos = ref([]);
+const todo_items = ref([]);
+const total = ref(0);
+const pagination = reactive({
+  pageSize: 10, // 每页显示的数量
+  currentPage: 1, // 当前页码
+});
+
+const totalPage = computed(() => Math.ceil(total.value / pagination.pageSize));
+
+const changeTodoStatus = (index) => {
+  const todoId = todo_items.value[index].id;
+  const todoStatus = !todo_items.value[index].completed;
+  TodoService.changeTodoStatus(todoId, todoStatus)
+  .then(() => {
+    todo_items.value[index].completed = !todo_items.value[index].completed;
+  })
+  .catch((error) => {
+        console.error("更新状态失败:", error);
+      });
+};
 
 const fetchTodos = () => {
-  TodoService.getTodos()
+  TodoService.getTodos(pagination.pageSize, pagination.currentPage)
     .then((response) => {
-      todos.value = response.data;
+      const data = response.data;
+      todo_items.value = data.todo_items;
+      total.value = data.total;
     })
     .catch((error) => {
       console.error("获取失败:", error);
@@ -69,8 +95,30 @@ const getButtonClass = (completed) => {
   };
 };
 
+const getTodoItemClass = (completed) => {
+  return {
+    "todo-item-true": completed === true,
+    "todo-item-false": completed === false,
+  };
+};
+
+
 const getButtonText = (completed) => {
   return completed === true ? "已完成" : "未完成";
+};
+
+const nextPage = () => {
+  if (pagination.currentPage < totalPage.value) {
+    pagination.currentPage++;
+    fetchTodos();
+  }
+};
+
+const prevPage = () => {
+  if (pagination.currentPage > 1) {
+    pagination.currentPage--;
+    fetchTodos();
+  }
 };
 
 onMounted(() => {
@@ -91,6 +139,7 @@ onMounted(() => {
 .todo-app .todo-list {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .todo-app .todo-list .todo-item {
@@ -99,7 +148,6 @@ onMounted(() => {
   flex-direction: row;
   align-items: center;
   padding: 10px 0;
-  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 16px;
 }
@@ -150,15 +198,31 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  transition: 0.5s cubic-bezier(0.42, 0, 0.58, 1);
 }
 
 .button-completed-true {
   background-color: #3cd1c2;
-  color: white;
 }
 
 .button-completed-false {
   background-color: #ffaa2c;
-  color: white;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  margin-top: 10px;
+  background-color: #fafafa;
+}
+
+.todo-item-true {
+  border-left: 4px solid #3cd1c2;
+}
+
+.todo-item-false {
+  border-left: 4px solid #ffaa2c;
 }
 </style>

@@ -4,8 +4,13 @@ const apiBaseUrl = 'http://localhost:5000/api/todos';
 const loginBaseUrl = 'http://localhost:5000/api';
 
 export default {
-  getTodos() {
-    return axios.get(apiBaseUrl);
+  getTodos(pageSize, currentPage) {
+    return axios.get(apiBaseUrl, {
+      params: { 
+        pageSize,
+        currentPage,
+      },
+    });
   },
 
   addTodo(todo) {
@@ -18,6 +23,12 @@ export default {
 
   deleteTodo(todoId) {
     return axios.delete(`${apiBaseUrl}/${todoId}`);
+  },
+
+  changeTodoStatus(todoId, todoStatus) {
+    return axios.post(`${apiBaseUrl}/${todoId}`,{
+      todoStatus: todoStatus,
+    });
   },
 
   loginSubmit(data) {

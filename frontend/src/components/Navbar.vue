@@ -115,7 +115,6 @@ const add_todo_popup = computed(() => store.state.add_todo_popup);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #fff;
 }
 
 .wrapper .main_content .header {
@@ -131,6 +130,7 @@ const add_todo_popup = computed(() => store.state.add_todo_popup);
     justify-content: space-between;
     align-items: center; 
     margin-left: 10px;
+
 }
 
 .icon-check-circle {
