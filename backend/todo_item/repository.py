@@ -1,7 +1,6 @@
 from backend.todo_item.model import TodoItem
 from backend.database.database import db
 
-
 def get_todo_items(page_size, current_page):
     start_index = (current_page - 1) * page_size
     todos = TodoItem.query.offset(start_index).limit(page_size).all()

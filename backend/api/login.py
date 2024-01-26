@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from backend.api import bp
 from backend.user.repository import get_user_by_username
-from flask_login import login_user, current_user
+from flask_login import login_user, current_user, logout_user
 
 @bp.route("/login", methods=["POST"])
 def login():
@@ -23,3 +23,10 @@ def check_login_status():
         return jsonify({'status': 'success', 'message': '用户已登陆'})
     else:
         return jsonify({'status': 'error', 'message': '未登陆'}), 401
+    
+
+@bp.route('/sign-out', methods=["POST"])
+def sign_out():
+    logout_user()
+    return "退出登陆成功"
+    

@@ -39,5 +39,9 @@ export default {
 
   checkLoginStatus() {
     return axios.get(`${loginBaseUrl}/check-login-status`);
+  },
+
+  signOut() {
+    return axios.post(`${loginBaseUrl}/sign-out`);
   }
 };

@@ -9,6 +9,7 @@
         </div>
         <div class="main_content">
             <div class="header">
+                <DropDown :user="userInfo" />
             </div>
 
             <div class="main">
@@ -24,6 +25,7 @@
                         </div>
                     </div>
                     <div class="spacer"></div> 
+
                     <div class="button-icon">
                         <div class="icon-plus-circle">
                             <PlusCircleOutlined @click="store.commit('toggleAddTodoPopup')"/>
@@ -52,10 +54,15 @@ import {
 import TodoService from '../service';
 import TodoList from './TodoList.vue';
 import AddTodoPopup from './AddTodoPopup.vue';
+import DropDown from "./dropDown.vue";
 
 
 const store = useStore()
 const add_todo_popup = computed(() => store.state.add_todo_popup);
+const userInfo = {
+  name: 'root',
+  age: 30
+};
 
 </script>
 <style scoped>
@@ -110,7 +117,7 @@ const add_todo_popup = computed(() => store.state.add_todo_popup);
 }
 
 .wrapper .main_content .main {
-    margin: 50px 24px 24px 24px;
+    margin: 25px 24px 24px 24px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -118,9 +125,10 @@ const add_todo_popup = computed(() => store.state.add_todo_popup);
 }
 
 .wrapper .main_content .header {
-    padding: 41px;
+   height: 50px;
     font-size: 30px;
     color: #535050;
+     background-color: #4b4276;
 }
 
 .wrapper .main_content .main .laout {
