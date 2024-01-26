@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-const apiBaseUrl = 'http://localhost:5000/api/todos';
-const loginBaseUrl = 'http://localhost:5000/api';
+const apiBaseUrl = '/api/todos';
+const loginBaseUrl = '/api';
+
+axios.defaults.withCredentials = true;
 
 export default {
   getTodos(pageSize, currentPage) {
@@ -33,5 +35,9 @@ export default {
 
   loginSubmit(data) {
     return axios.post(`${loginBaseUrl}/login`, data);
+  },
+
+  checkLoginStatus() {
+    return axios.get(`${loginBaseUrl}/check-login-status`);
   }
 };

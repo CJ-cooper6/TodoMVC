@@ -5,8 +5,8 @@ from flask_login import login_required
 from backend.todo_item.service import changeTodoStatusById
 
 
-@login_required
 @bp.route('/todos', methods=['GET'])
+@login_required
 def get_todos():
     page_size = int(request.args.get('pageSize', 10))
     current_page = int(request.args.get('currentPage', 1))
@@ -17,16 +17,16 @@ def get_todos():
     return jsonify({"total": total, "todo_items": todo_items})
 
 
-@login_required
 @bp.route('/todos', methods=['POST'])
+@login_required
 def add_todo_item():
     data = request.get_json()
     new_todo = add_todo(title=data.get("title"), completed=data.get("completed", False))
     return jsonify(new_todo), 200
 
 
-@login_required
 @bp.route('/todos/<int:todo_id>', methods=['PUT'])
+@login_required
 def update_todo_item(todo_id):
     data = request.get_json()
     updated_todo = update_todo(todo_id, title=data.get("title"), completed=data.get("completed"))
@@ -35,8 +35,8 @@ def update_todo_item(todo_id):
     return jsonify({"error": "Todo not found"}), 404
 
 
-@login_required
 @bp.route('/todos/<int:todo_id>', methods=['DELETE'])
+@login_required
 def delete_todo_item(todo_id):
     result = delete_todo(todo_id)
     if result:
@@ -44,8 +44,8 @@ def delete_todo_item(todo_id):
     return jsonify({"error": "Todo not found"}), 404
 
 
-@login_required
 @bp.route('/todos/<int:todo_id>', methods=['POST'])
+@login_required
 def changeTodoStatus(todo_id):
     data = request.get_json()
     status = data.get("todoStatus")

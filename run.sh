@@ -3,5 +3,5 @@ python run.py &
 
 
 cd frontend
-npm install
+# npm install
 npm run dev
