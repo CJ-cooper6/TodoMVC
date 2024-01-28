@@ -6,7 +6,9 @@ from backend import database as todo_db
 from backend.database import db
 from flask_login import LoginManager
 from backend.user.repository import get_user
+
 login_manager = LoginManager()
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -14,12 +16,13 @@ def load_user(user_id):
     print(user)
     return user
 
+
 def create_app():
     app = Flask(__name__)
     CORS(app, supports_credentials=True)
     config_file_path = get_config_file_path()
     config_provider.load(config_file_path)
-    login_manager.init_app(app)  
+    login_manager.init_app(app)
     app.config['SECRET_KEY'] = 'todoMVC'
     todo_db.init_app(app)
     _register_blueprints(app)
