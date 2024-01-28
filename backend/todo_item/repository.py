@@ -57,6 +57,4 @@ def get_todo_items_by_page(current_page, page_size):
 
 
 def get_todo_items_by_completed(current_page, page_size, completed):
-    return TodoItem.query.filter(TodoItem.completed == completed).paginate(
-        current_page, page_size, error_out=False
-    )
+    return TodoItem.query.filter(TodoItem.completed == completed).paginate(current_page, page_size, error_out=False)

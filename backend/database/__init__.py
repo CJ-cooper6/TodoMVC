@@ -1,8 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 from .database import db
+
+
 def init_app(app):
     from backend.configuration import config_provider
-    config = config_provider.config['DATABASE']
+
+    config = config_provider.config["DATABASE"]
     print(config)
     _init_sqlalchemy(app, config)
 

@@ -1,5 +1,6 @@
 import os.path
 
+
 def get_project_root(path=__file__):
     directory = os.path.dirname(path)
 

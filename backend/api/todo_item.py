@@ -33,9 +33,7 @@ def add_todo_item():
 @login_required
 def update_todo_item(todo_id):
     data = request.get_json()
-    updated_todo = update_todo(
-        todo_id, title=data.get("title"), completed=data.get("completed")
-    )
+    updated_todo = update_todo(todo_id, title=data.get("title"), completed=data.get("completed"))
     if updated_todo:
         return success({"updated_todo": updated_todo})
     return bad_request_with_data({"error": "Todo not found"}, 404)

@@ -8,8 +8,8 @@ from backend.response_helper import success, bad_request_with_data
 @bp.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    username = data.get("username")
+    password = data.get("password")
     print(username, password)
     user = get_user_by_username(username)
     if user and user.check_password(password):
@@ -19,15 +19,15 @@ def login():
     return bad_request_with_data({"login": "fail"}, 500)
 
 
-@bp.route('/check-login-status', methods=["GET"])
+@bp.route("/check-login-status", methods=["GET"])
 def check_login_status():
     if current_user.is_authenticated:
-        return success({'status': 'success', 'message': '用户已登陆'})
+        return success({"status": "success", "message": "用户已登陆"})
     else:
-        return bad_request_with_data({'status': 'error', 'message': '未登陆'}, 401)
+        return bad_request_with_data({"status": "error", "message": "未登陆"}, 401)
 
 
-@bp.route('/sign-out', methods=["POST"])
+@bp.route("/sign-out", methods=["POST"])
 def sign_out():
     logout_user()
-    return success({'message': '退出登陆成功'})
+    return success({"message": "退出登陆成功"})

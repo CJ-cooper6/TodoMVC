@@ -1,6 +1,7 @@
 from datetime import datetime
 from backend.database import db
 
+
 class TodoItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
