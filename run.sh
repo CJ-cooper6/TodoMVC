@@ -1,4 +1,4 @@
-source venv/Scripts/activate
+#source venv/Scripts/activate
 python run.py &
 
 

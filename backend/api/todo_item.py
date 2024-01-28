@@ -18,7 +18,8 @@ from backend.request_helper import get_pagination
 def get_todos():
     current_page, page_size = get_pagination()
     todos = get_todo_items_by_page(current_page, page_size)
-    return success({"total": todos.total, "todo_items": todos.items})
+    serialized_todos = [todo.to_dict() for todo in todos.items]
+    return success({"total": todos.total, "todo_items": serialized_todos})
 
 
 @bp.route("/todos", methods=["POST"])
