@@ -1,0 +1,80 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+      - id: check-added-large-files
+      - id: trailing-whitespace
+
+  - repo: https://github.com/ambv/black
+    rev: 20.8b1
+    hooks:
+      - id: black
+        language_version: python3.9
+        additional_dependencies: ["click==8.0.4"]
+
+  - repo: https://github.com/pre-commit/mirrors-pylint
+    rev: v2.7.4
+    hooks:
+      - id: pylint
+        name: pylint
+        stages: [commit]
+        types: [python]
+        require_serial: true
+        args:
+          - -j 10
+          - --disable=I,arguments-differ,bad-continuation,consider-iterating-dictionary,len-as-condition,misplaced-comparison-constant,multiple-imports,singleton-comparison,trailing-newlines,ungrouped-imports,unidiomatic-typecheck,unneeded-not,wrong-import-order,wrong-import-position,assigning-non-slot,bad-option-value,invalid-sequence-index,not-an-iterable,consider-merging-isinstance,consider-using-ternary,inconsistent-return-statements,import-outside-toplevel,literal-comparison,no-else-return,redefined-argument-from-local,too-many-ancestors,too-many-boolean-expressions,too-many-locals,too-many-nested-blocks,abstract-method,broad-except,cell-var-from-loop,keyword-arg-before-vararg,logging-format-interpolation,redefined-outer-name,reimported,useless-super-delegation,useless-object-inheritance,consider-using-dict-comprehension,simplifiable-if-expression,star-args,too-many-ancestors,consider-using-in,consider-using-set-comprehension,consider-using-enumerate,comparison-with-callable
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.961
+    hooks:
+      - id: mypy
+        stages: [commit]
+        files: ^backend/
+        additional_dependencies:
+          [
+            sqlalchemy-stubs==0.3,
+            tokenize-rt==3.2.0,
+            types-requests,
+            types-simplejson,
+            types-PyYAML,
+            types-six,
+            types-chardet,
+            types-redis,
+            types-pytz,
+            types-PyMySQL,
+            types-bleach,
+            types-setuptools,
+            types-python-dateutil,
+          ]
+        language_version: python3.9
+
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.3.0
+    hooks:
+      - id: prettier
+        #        exclude: vendor
+        files: "\\.(\
+          css|less|scss\
+          |graphql|gql\
+          |js|jsx\
+          |json\
+          |md|markdown|mdown|mkdn\
+          |mdx\
+          |ts|tsx\
+          |vue\
+          |yaml|yml\
+          )$"
+
+  - repo: local
+    hooks:
+      - id: eslinter
+        name: eslinter
+        entry: yarn lint-fix
+        # exclude: vendor
+        language: node
+        files: "frontend/src/\\S*\\.(js|vue|ts)$"

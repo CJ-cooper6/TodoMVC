@@ -1,11 +1,19 @@
 from backend.todo_item.model import TodoItem
 from backend.database.database import db
 
+
 def get_todo_items(page_size, current_page):
     start_index = (current_page - 1) * page_size
     todos = TodoItem.query.offset(start_index).limit(page_size).all()
-    return [{"id": todo.id, "title": todo.title, "completed": todo.completed, "end_time": todo.end_time} for todo in
-            todos]
+    return [
+        {
+            "id": todo.id,
+            "title": todo.title,
+            "completed": todo.completed,
+            "end_time": todo.end_time,
+        }
+        for todo in todos
+    ]
 
 
 def add_todo(title, completed=False):
@@ -42,3 +50,13 @@ def get_todo_count():
 
 def get_todo_by_id(todo_id):
     return TodoItem.query.get(todo_id)
+
+
+def get_todo_items_by_page(current_page, page_size):
+    return TodoItem.query.paginate(current_page, page_size, error_out=False)
+
+
+def get_todo_items_by_completed(current_page, page_size, completed):
+    return TodoItem.query.filter(TodoItem.completed == completed).paginate(
+        current_page, page_size, error_out=False
+    )
