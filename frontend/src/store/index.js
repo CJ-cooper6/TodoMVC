@@ -5,6 +5,7 @@ export default createStore({
   state: {
     add_todo_popup: false,
     isAuthenticated: false,
+    whither: "todo-list",
   },
 
   mutations: {
@@ -16,14 +17,18 @@ export default createStore({
     setAuthentication(state, isAuthenticated) {
       state.isAuthenticated = isAuthenticated;
       },
+
+    jumpTodoList(state) {
+      state.whither = "todo-list";
+    },
+
+    jumpUserCenter(state) {
+      state.whither = "user-center";
+    }
   },
 
   actions: {
-    checkAuthentication({ commit }) {
-      // 在这里进行认证状态的检查，可以发送请求到后端验证用户的登录状态等
-      const isAuthenticated = True; // 根据后端返回的数据设置认证状态
-      commit('setAuthentication', isAuthenticated);
-    }
+
   },
   getters: {
   
