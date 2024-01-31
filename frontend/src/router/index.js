@@ -47,11 +47,9 @@ router.beforeEach(async (to, from, next) => {
 const checkLogin = async () => {
   try {
     const response = await TodoService.checkLoginStatus();
-    console.log(response);
     if (response.status === 200) {
       return true;
     } else {
-      console.log()
       return false;
     }
   } catch (err) {

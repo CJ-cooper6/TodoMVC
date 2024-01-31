@@ -11,7 +11,6 @@ export default createStore({
   mutations: {
     toggleAddTodoPopup(state) {
         state.add_todo_popup = !state.add_todo_popup
-        console.log(state.add_todo_popup)
       },
     
     setAuthentication(state, isAuthenticated) {

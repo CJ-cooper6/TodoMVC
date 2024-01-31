@@ -28,7 +28,6 @@ const props = defineProps({
 });
 
 const onClick = ({key}) => {
-  console.log(key);
   if (key === "out") {
     TodoService.signOut()
       .then(() => {

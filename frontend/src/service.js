@@ -15,12 +15,20 @@ export default {
     });
   },
 
+  getUserInfo() {
+    return axios.get(`${loginBaseUrl}/user`);
+  },
+
   addTodo(todo) {
     return axios.post(apiBaseUrl, todo);
   },
 
   updateTodo(todoId, data) {
     return axios.put(`${apiBaseUrl}/${todoId}`, data);
+  },
+
+  updateUserInfo(data) {
+    return axios.put(`${loginBaseUrl}/user`, data);
   },
 
   deleteTodo(todoId) {

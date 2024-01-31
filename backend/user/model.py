@@ -32,3 +32,12 @@ class User(db.Model, UserMixin):
 
     def get_id(self):
         return self.id
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "nickname": self.nickname,
+            "email": self.email,
+            "avatar_url": self.avatar_url,
+        }

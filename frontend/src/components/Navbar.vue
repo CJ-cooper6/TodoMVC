@@ -13,7 +13,7 @@
       </div>
 
       <div class="main">
-        <div class="laout">
+        <div class="laout" v-if="whither!='user-center'">
           <div class="button-icon">
             <div class="icon-bank-out">
               <AppstoreOutlined @click="toggleFetchTodos()" />
