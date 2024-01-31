@@ -63,6 +63,18 @@ const fetchTodos = () => {
     });
 };
 
+const fetchTodosWithStatus = () => {
+  TodoService.getTodosWithStatus(pagination.pageSize, pagination.currentPage, true)
+    .then((response) => {
+      const data = response.data;
+      todo_items.value = data.todo_items;
+      total.value = data.total;
+    })
+    .catch((error) => {
+      console.error("获取失败:", error);
+    });
+};
+
 const editTodo = (todoId) => {
   const newText = prompt("重新输入一个todo:");
   if (newText !== null) {
@@ -124,6 +136,7 @@ const prevPage = () => {
 onMounted(() => {
   fetchTodos();
   EventBus.on('update-todolist', fetchTodos);
+  EventBus.on('fillter-todolist', fetchTodosWithStatus);
 });
 
 </script>

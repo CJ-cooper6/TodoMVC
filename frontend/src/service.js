@@ -43,5 +43,16 @@ export default {
 
   signOut() {
     return axios.post(`${loginBaseUrl}/sign-out`);
-  }
+  },
+
+  getTodosWithStatus(pageSize, currentPage, status) {
+    return axios.get(`${apiBaseUrl}/status`, {
+      params: { 
+        pageSize,
+        currentPage,
+        status,
+      },
+    });
+  },
+
 };

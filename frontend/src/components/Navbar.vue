@@ -16,12 +16,12 @@
                 <div class="laout">
                     <div class="button-icon">
                         <div class="icon-bank-out">
-                            <AppstoreOutlined />
+                            <AppstoreOutlined @click="toggleFetchTodos()"/>
                         </div>
                     </div>
                     <div class="button-icon">
                         <div class="icon-check-circle">
-                            <CheckCircleOutlined />
+                            <CheckCircleOutlined @click="toggleGetTodosWithStatus()"/>
                         </div>
                     </div>
                     <div class="spacer"></div> 
@@ -55,9 +55,18 @@ import TodoService from '../service';
 import TodoList from './TodoList.vue';
 import AddTodoPopup from './AddTodoPopup.vue';
 import DropDown from "./dropDown.vue";
+import EventBus from '../eventbus';
 
 
-const store = useStore()
+const store = useStore();
+const toggleGetTodosWithStatus = () => {
+    EventBus.emit('fillter-todolist');
+};
+
+const toggleFetchTodos = () => {
+     EventBus.emit('update-todolist');
+};
+
 const add_todo_popup = computed(() => store.state.add_todo_popup);
 const userInfo = {
   name: 'root',

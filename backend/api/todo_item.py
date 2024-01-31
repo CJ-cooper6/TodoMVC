@@ -68,4 +68,5 @@ def get_finished_todos():
     completed = request.args.get("completed", True)
     current_page, page_size = get_pagination()
     todos = get_todo_items_by_completed(current_page, page_size, completed)
-    return success({"total": todos.total, "todo_items": todos.items})
+    serialized_todos = [todo.to_dict() for todo in todos.items]
+    return success({"total": todos.total, "todo_items": serialized_todos})
