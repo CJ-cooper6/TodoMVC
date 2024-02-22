@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  todo-frontend:
+    build: ./frontend  
+    ports:
+      - "5174:5174"
+    depends_on:
+      - todo-freight 
+  todo-freight:
+    build: ./  
+    ports:
+      - "5001:5001" 
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

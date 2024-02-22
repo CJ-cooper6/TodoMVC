@@ -3,6 +3,7 @@
 .mypy_cache/
 .envrc
 .env
+__pycache__
 
 /dist
 /build
