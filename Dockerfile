@@ -8,6 +8,5 @@ RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 RUN rm -rf /app/frontend
-EXPOSE 5001
-
+EXPOSE 5002
 CMD ["python", "run.py"]

@@ -9,6 +9,6 @@ services:
   todo-freight:
     build: ./  
     ports:
-      - "5001:5001" 
+      - "5002:5002" 
     extra_hosts:
       - "host.docker.internal:host-gateway"
